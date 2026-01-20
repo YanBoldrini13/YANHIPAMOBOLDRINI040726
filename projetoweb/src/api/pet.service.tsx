@@ -38,3 +38,5 @@ export async function atualizarPet(
 export async function deletarPet(id: number): Promise<void> {
   await axios.delete(`/pets/${id}`);
 }
+/* 🔹 Alias (opcional) */
+export const salvarPet = criarPet;

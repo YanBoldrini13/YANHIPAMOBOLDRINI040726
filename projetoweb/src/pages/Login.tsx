@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
-//import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -9,17 +8,40 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    await login(username, password);
-    navigate("/");
+
+    console.log("[Login] Enviando login:", { username });
+
+    try {
+      await login(username, password);
+      console.log("[Login] Login OK, navegando para /pets");
+
+      navigate("/pets", { replace: true });
+    } catch (error) {
+      console.error("[Login] Erro no login:", error);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
-      <input placeholder="Usuário" onChange={e => setUsername(e.target.value)} />
-      <input type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)} />
+
+      <input
+        placeholder="Usuário"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Senha"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
       <button type="submit">Entrar</button>
     </form>
   );

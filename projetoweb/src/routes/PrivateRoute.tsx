@@ -8,5 +8,13 @@ type PrivateRouteProps = {
 export default function PrivateRoute({ children }: PrivateRouteProps) {
   const token = localStorage.getItem("accessToken");
 
-  return token ? <>{children}</> : <Navigate to="/login" />;
+  console.log("[PrivateRoute] token:", token);
+
+  if (!token) {
+    console.warn("[PrivateRoute] Sem token → redirecionando para /login");
+    return <Navigate to="/login" replace />;
+  }
+
+  console.log("[PrivateRoute] Token OK → renderizando children");
+  return <>{children}</>;
 }
