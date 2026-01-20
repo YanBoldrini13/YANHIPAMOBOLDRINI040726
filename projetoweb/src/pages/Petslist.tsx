@@ -2,18 +2,25 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { listarPets } from "../api/pet.service";
 
-export default function Petslist() {
-  const [pets, setPets] = useState([]);
+type Pet = {
+  id: number;
+  name: string;
+  breed: string;
+};
+
+export default function PetsList() {
+  const [pets, setPets] = useState<Pet[]>([]);
 
   useEffect(() => {
-    const fetchPets = async () => {
+    async function fetchPets() {
       try {
-        const data = await listarPets();
+        const data = await listarPets(); // já é Pet[]
         setPets(data);
       } catch (error) {
         console.error("Erro ao buscar pets:", error);
       }
-    };
+    }
+
     fetchPets();
   }, []);
 

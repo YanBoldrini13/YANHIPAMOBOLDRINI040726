@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Login from "./pages/Login";
 import Petslist from "./pages/Petslist";
 import PetDetail from "./pages/PetDetail";
 import PetForm from "./pages/PetForm";
 import TutorForm from "./pages/TutorForm";
+
 import PrivateRoute from "./routes/PrivateRoute";
-import { AuthProvider } from "../../context/authContext";
+import { AuthProvider } from "./context/authContext";
+
+
 
 function App() {
   return (
@@ -13,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-
+s
           <Route
             path="/"
             element={

@@ -7,8 +7,11 @@ export default function TutorForm() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
+
     try {
       await salvarTutor({ name, email });
       navigate("/");
@@ -20,16 +23,19 @@ export default function TutorForm() {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Novo Tutor</h1>
+
       <input
         placeholder="Nome"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+
       <input
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+
       <button type="submit">Salvar</button>
     </form>
   );
