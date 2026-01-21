@@ -17,9 +17,9 @@ export default function Login() {
 
     try {
       await login(username, password);
-      console.log("[Login] Login OK, navegando para /pets");
+      console.log("[Login] Login OK, navegando para /");
 
-      navigate("/pets", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("[Login] Erro no login:", error);
     }

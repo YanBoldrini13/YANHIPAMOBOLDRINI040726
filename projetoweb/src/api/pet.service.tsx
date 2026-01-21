@@ -1,42 +1,32 @@
-import axios from "axios";
+import api from "./axios"; // seu axios configurado com token
 
-/* 🔹 Tipagem do Pet */
 export type Pet = {
-  id: number;
+  id: string;
   name: string;
-  breed: string;
+  age: number;
+  species: string;
+  // adicione outros campos que a API retornar
 };
 
-/* 🔹 Listar todos os pets */
-export async function listarPets(): Promise<Pet[]> {
-  const response = await axios.get<Pet[]>("/pets");
-  return response.data;
-}
+export type PetListResponse = {
+  content: Pet[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number; // página atual
+};
 
-/* 🔹 Buscar um pet por ID */
-export async function buscarPet(id: number): Promise<Pet> {
-  const response = await axios.get<Pet>(`/pets/${id}`);
-  return response.data;
-}
+export const getPets = async (page = 0, size = 10): Promise<PetListResponse> => {
+  try {
+    const response = await api.get(`/v1/pets?page=${page}&size=${size}`);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Erro ao buscar pets:", error.message);
+    } else {
+      console.error("Erro desconhecido ao buscar pets:", error);
+    }
+    throw error;
+  }
+};
 
-/* 🔹 Criar um novo pet */
-export async function criarPet(pet: Omit<Pet, "id">): Promise<Pet> {
-  const response = await axios.post<Pet>("/pets", pet);
-  return response.data;
-}
-
-/* 🔹 Atualizar um pet */
-export async function atualizarPet(
-  id: number,
-  pet: Omit<Pet, "id">
-): Promise<Pet> {
-  const response = await axios.put<Pet>(`/pets/${id}`, pet);
-  return response.data;
-}
-
-/* 🔹 Remover um pet */
-export async function deletarPet(id: number): Promise<void> {
-  await axios.delete(`/pets/${id}`);
-}
-/* 🔹 Alias (opcional) */
-export const salvarPet = criarPet;

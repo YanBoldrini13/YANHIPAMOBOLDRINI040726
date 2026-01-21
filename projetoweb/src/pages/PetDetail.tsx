@@ -1,63 +1,45 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { buscarPet } from "../api/pet.service";
+import { useEffect, useState } from "react";
+import { getPets, type Pet } from "../api/pet.service";
 
-/* 🔹 Tipagem do Pet */
-type Pet = {
-  id: number;
-  name: string;
-  breed: string;
-};
-
-/* 🔹 Tipagem para os parâmetros da rota */
-interface RouteParams {
-  id: string;
-}
-
-export default function PetDetail() {
-  const params = useParams() as unknown as RouteParams; // safe para erasableSyntaxOnly
-  const id = params.id;
-
-  const [pet, setPet] = useState<Pet | null>(null);
+export default function Petslist() {
+  const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
+  const [size] = useState(10);
 
   useEffect(() => {
-    const fetchPet = async () => {
-      if (!id) {
-        setLoading(false);
-        return;
-      }
-
-      const petId = Number(id);
-      if (isNaN(petId)) {
-        console.error("ID inválido:", id);
-        setLoading(false);
-        return;
-      }
-
+    const fetchPets = async () => {
       try {
-        const response = await buscarPet(petId);
-        setPet(response);
+        setLoading(true);
+        const data = await getPets(page, size);
+        setPets(data.content);
       } catch (error) {
-        console.error("Erro ao buscar pet:", error);
-        setPet(null);
+        console.error("Erro ao carregar pets:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPet();
-  }, [id]);
+    fetchPets();
+  }, [page, size]);
 
-  if (loading) return <div>Carregando...</div>;
-  if (!pet) return <div>Pet não encontrado</div>;
+  if (loading) return <p>Carregando pets...</p>;
 
   return (
     <div>
-      <h1>Detalhes do Pet</h1>
-      <p>Nome: {pet.name}</p>
-      <p>Raça: {pet.breed}</p>
-      <Link to="/pets">Voltar</Link>
+      <h2>Lista de Pets</h2>
+      <ul>
+        {pets.map((pet) => (
+          <li key={pet.id}>
+            {pet.name} - {pet.species} - {pet.age} anos
+          </li>
+        ))}
+      </ul>
+
+      <button onClick={() => setPage(page - 1)} disabled={page === 0}>
+        Anterior
+      </button>
+      <button onClick={() => setPage(page + 1)}>Próxima</button>
     </div>
   );
 }

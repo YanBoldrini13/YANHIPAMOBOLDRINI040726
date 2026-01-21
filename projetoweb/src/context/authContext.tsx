@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { login as loginService } from "../api/auth.service";
+import { getInitialUser } from "./auth.utils";
+
 
 type User = {
   username: string;
@@ -7,24 +9,23 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  loading: boolean;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-type AuthProviderProps = {
-  children: ReactNode;
-};
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(getInitialUser);
+  const [loading] = useState(false);
 
   const login = async (username: string, password: string) => {
     const data = await loginService(username, password);
 
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
+    localStorage.setItem("username", username);
 
     setUser({ username });
   };
@@ -35,18 +36,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-
   return context;
 };
