@@ -1,11 +1,11 @@
-import api from "./axios"; // seu axios configurado com token
+import api from "./axios"; // axios configurado com token
 
 export type Pet = {
   id: string;
   name: string;
   age: number;
   species: string;
-  // adicione outros campos que a API retornar
+  breed: string;
 };
 
 export type PetListResponse = {
@@ -13,10 +13,10 @@ export type PetListResponse = {
   totalPages: number;
   totalElements: number;
   size: number;
-  number: number; // página atual
+  number: number; //pag
 };
 
-export const getPets = async (page = 0, size = 10): Promise<PetListResponse> => {
+export const listarPets = async (page = 0, size = 10): Promise<PetListResponse> => {
   try {
     const response = await api.get(`/v1/pets?page=${page}&size=${size}`);
     return response.data;
@@ -29,4 +29,3 @@ export const getPets = async (page = 0, size = 10): Promise<PetListResponse> => 
     throw error;
   }
 };
-

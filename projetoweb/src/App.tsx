@@ -13,15 +13,6 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-
-      <Route
-        path="/pets"
-        element={
-          <PrivateRoute>
-            <Petslist />
-          </PrivateRoute>
-        }
-      />
       <Route
         path="/"
         element={
@@ -30,6 +21,15 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route
+        path="/pets"
+        element={
+          <PrivateRoute>
+            <Petslist />
+          </PrivateRoute>
+        }
+      />
+
 
       <Route
         path="/pets/:id"
