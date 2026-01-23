@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Petslist from "./pages/Petslist";
-import PetDetail from "./pages/PetDetail";
 import PetForm from "./pages/PetForm";
 import TutorForm from "./pages/TutorForm";
 
@@ -26,16 +25,6 @@ function App() {
         element={
           <PrivateRoute>
             <Petslist />
-          </PrivateRoute>
-        }
-      />
-
-
-      <Route
-        path="/pets/:id"
-        element={
-          <PrivateRoute>
-            <PetDetail />
           </PrivateRoute>
         }
       />
