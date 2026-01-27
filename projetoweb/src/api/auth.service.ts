@@ -1,5 +1,5 @@
-//import api from "./axios";
-import api from "./axios"
+import axios from "axios";
+import api from "./axios";
 
 export const login = async (username: string, password: string) => {
   const response = await api.post("/autenticacao/login", {
@@ -13,8 +13,8 @@ export const login = async (username: string, password: string) => {
 export const refreshToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
 
-  const response = await api.put(
-    "/autenticacao/refresh",
+  const response = await axios.put(
+    "https://pet-manager-api.geia.vip/autenticacao/refresh",
     {},
     {
       headers: {
