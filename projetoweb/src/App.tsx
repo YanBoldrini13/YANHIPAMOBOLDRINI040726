@@ -1,53 +1,81 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Petslist from "./pages/Petslist";
-import PetForm from "./pages/PetForm";
-import TutorForm from "./pages/TutorForm";
-
 import PrivateRoute from "./routes/PrivateRoute";
-import Home from "./pages/Home";
+import Layout from "./components/Layout";
+import LoadingScreen from "./components/LoadingScreen";
+
+// Lazy Imports
+const Login = lazy(() => import("./pages/Login"));
+const Home = lazy(() => import("./pages/Home"));
+const Petslist = lazy(() => import("./pages/Petslist"));
+const PetForm = lazy(() => import("./pages/PetForm"));
+const PetsEdit = lazy(() => import("./pages/PetsEdit"));
+
+const TutorForm = lazy(() => import("./pages/TutorForm"));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/pets"
-        element={
-          <PrivateRoute>
-            <Petslist />
-          </PrivateRoute>
-        }
-      />
+    <Suspense fallback={<LoadingScreen />}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Home />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/pets"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Petslist />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
 
-      <Route
-        path="/pets/novo"
-        element={
-          <PrivateRoute>
-            <PetForm />
-          </PrivateRoute>
-        }
-      />
+        <Route
+          path="/pets/novo"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <PetForm />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
 
-      <Route
-        path="/tutor/novo"
-        element={
-          <PrivateRoute>
-            <TutorForm />
-          </PrivateRoute>
-        }
-      />
-    </Routes>
+        <Route
+          path="/pets/editar/:id"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <PetsEdit />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/tutor/novo"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <TutorForm />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 }
 
 export default App;
+

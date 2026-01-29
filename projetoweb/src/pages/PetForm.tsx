@@ -1,101 +1,106 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { salvaPet } from "../api/pet.service";
+import { useNavigate } from "react-router-dom";
 
 export default function PetForm() {
   const [nome, setNome] = useState("");
   const [raca, setRaca] = useState("");
-  const [idade, setIdade] = useState<number | "">("");
+  const [idade, setIdade] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      await salvaPet({ nome, raca, idade: Number(idade) });
-      setSuccess(true);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+      await salvaPet({ nome, raca, idade });
+      alert("🐾 Pet cadastrado com sucesso!");
+      navigate("/pets");
     } catch (error) {
-      console.error("Erro ao criar pet:", error);
-      alert("Erro ao salvar o pet ");
+      console.error(error);
+      alert("Erro ao salvar pet.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8"
-      >
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          🐾 Novo Pet
-        </h1>
+    <div className="max-w-2xl mx-auto animate-in slide-in-from-bottom-4 duration-700">
+      <div className="text-center mb-10">
+        <h2 className="text-4xl font-extrabold text-white">Novo Amiguinho</h2>
+        <p className="text-slate-400 mt-2">Preencha os dados abaixo para cadastrar um novo pet.</p>
+      </div>
 
-        {success && (
-          <div className="mb-4 rounded-lg bg-green-100 text-green-700 px-4 py-3 text-sm text-center">
-            Pet cadastrado com sucesso! Redirecionando...
+      <div className="glass rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        {/* Glow effect */}
+        <div className="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl"></div>
+
+        <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-300 ml-1">Nome do Pet</label>
+              <input
+                type="text"
+                placeholder="Ex: Rex, Luna..."
+                className="input-field py-4"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-300 ml-1">Raça</label>
+                <input
+                  type="text"
+                  placeholder="Ex: Golden, SRD..."
+                  className="input-field py-4"
+                  value={raca}
+                  onChange={(e) => setRaca(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-300 ml-1">Idade (Anos)</label>
+                <input
+                  type="number"
+                  placeholder="0"
+                  className="input-field py-4"
+                  value={idade}
+                  onChange={(e) => setIdade(Number(e.target.value))}
+                  required
+                />
+              </div>
+            </div>
           </div>
-        )}
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Nome
-          </label>
-          <input
-            type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+          <div className="pt-4 flex gap-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex-grow py-4 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-2xl shadow-lg transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                "Finalizar Cadastro"
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/pets")}
+              className="px-8 py-4 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white rounded-2xl transition-all duration-300"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Raça
-          </label>
-          <input
-            type="text"
-            value={raca}
-            onChange={(e) => setRaca(e.target.value)}
-            required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Idade
-          </label>
-          <input
-            type="number"
-            min={0}
-            value={idade}
-            onChange={(e) =>
-              setIdade(e.target.value ? Number(e.target.value) : "")
-            }
-            required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-indigo-600 py-2.5 text-white font-semibold hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? "Salvando..." : "Salvar"}
-        </button>
-      </form>
+      <div className="mt-8 text-center text-slate-500 text-sm">
+        <p>Você poderá adicionar uma foto do pet logo após o cadastro na página de edição. 📸</p>
+      </div>
     </div>
   );
 }
