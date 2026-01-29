@@ -13,6 +13,8 @@ const PetForm = lazy(() => import("./pages/PetForm"));
 const PetsEdit = lazy(() => import("./pages/PetsEdit"));
 
 const TutorForm = lazy(() => import("./pages/TutorForm"));
+const TutorEdit = lazy(() => import("./pages/TutorEdit"));
+const TutoresList = lazy(() => import("./pages/TutoresList"));
 
 function App() {
   return (
@@ -63,6 +65,17 @@ function App() {
         />
 
         <Route
+          path="/tutores"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <TutoresList />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
           path="/tutor/novo"
           element={
             <PrivateRoute>
@@ -72,10 +85,23 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/tutor/editar/:id"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <TutorEdit />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Suspense>
   );
 }
+
+
 
 export default App;
 

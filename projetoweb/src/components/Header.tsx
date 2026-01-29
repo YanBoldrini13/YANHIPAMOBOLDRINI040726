@@ -24,6 +24,7 @@ export default function Header() {
                     <nav className="hidden md:flex space-x-8">
                         <Link to="/" className="text-slate-300 hover:text-teal-400 font-medium transition-colors">Home</Link>
                         <Link to="/pets" className="text-slate-300 hover:text-teal-400 font-medium transition-colors">Pets</Link>
+                        <Link to="/tutores" className="text-slate-300 hover:text-teal-400 font-medium transition-colors">Tutores</Link>
                         <Link to="/pets/novo" className="text-slate-300 hover:text-teal-400 font-medium transition-colors">Novo Pet</Link>
                         <Link to="/tutor/novo" className="text-slate-300 hover:text-teal-400 font-medium transition-colors">Novo Tutor</Link>
                     </nav>
@@ -42,6 +43,7 @@ export default function Header() {
                 <div className="md:hidden flex space-x-4 pb-3 overflow-x-auto no-scrollbar">
                     <Link to="/" className="text-xs text-slate-400 hover:text-teal-400 whitespace-nowrap">Home</Link>
                     <Link to="/pets" className="text-xs text-slate-400 hover:text-teal-400 whitespace-nowrap">Pets</Link>
+                    <Link to="/tutores" className="text-xs text-slate-400 hover:text-teal-400 whitespace-nowrap">Tutores</Link>
                     <Link to="/pets/novo" className="text-xs text-slate-400 hover:text-teal-400 whitespace-nowrap">Novo Pet</Link>
                     <Link to="/tutor/novo" className="text-xs text-slate-400 hover:text-teal-400 whitespace-nowrap">Novo Tutor</Link>
                 </div>

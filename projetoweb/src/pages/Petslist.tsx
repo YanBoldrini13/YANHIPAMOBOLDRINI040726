@@ -65,7 +65,7 @@ export default function Petslist() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
                 </div>
 
-                <div className="p-6 relative">
+                <div className="p-6 relative text-left">
                   <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors">{pet.nome}</h3>
                   <div className="mt-2 flex flex-wrap gap-2">
                     <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded-full">{pet.raca}</span>
@@ -102,8 +102,8 @@ export default function Petslist() {
                     key={i}
                     onClick={() => setPage(i)}
                     className={`w-10 h-10 rounded-lg font-medium transition-all ${page === i
-                        ? "bg-teal-500 text-white shadow-lg shadow-teal-500/20"
-                        : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                      ? "bg-teal-500 text-white shadow-lg shadow-teal-500/20"
+                      : "bg-slate-800 text-slate-400 hover:bg-slate-700"
                       }`}
                   >
                     {i + 1}

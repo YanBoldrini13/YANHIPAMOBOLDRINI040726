@@ -11,6 +11,11 @@ export type Pet = {
   raca: string;
   idade: number;
   foto?: PetFoto;
+  tutor?: {
+    id: number;
+    nome: string;
+    email: string;
+  };
 };
 
 export type CriarPet = {
