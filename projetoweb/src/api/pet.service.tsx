@@ -45,7 +45,8 @@ export const uploadFotoPet = async (
 ): Promise<void> => {
   const formData = new FormData();
   formData.append("foto", foto);
-  await api.post(`/v1/pets/${id}/foto`, formData, {
+  await api.post(`/v1/pets/${id}/fotos`, formData, {
+
     headers: {
       "Content-Type": "multipart/form-data",
     },
