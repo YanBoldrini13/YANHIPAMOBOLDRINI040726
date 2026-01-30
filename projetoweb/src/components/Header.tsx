@@ -17,7 +17,7 @@ export default function Header() {
                     <div className="flex items-center">
                         <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-emerald-500 bg-clip-text text-transparent flex items-center gap-2">
                             <span>🐾</span>
-                            <span className="hidden sm:inline">Pet Manager</span>
+                            <span className="hidden sm:inline">Pet gerenciador</span>
                         </Link>
                     </div>
 

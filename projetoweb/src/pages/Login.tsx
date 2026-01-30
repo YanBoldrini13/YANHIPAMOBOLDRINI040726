@@ -33,7 +33,7 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-teal-500/10 rounded-3xl border border-teal-500/20 mb-6 group hover:scale-110 transition-transform duration-500">
             <span className="text-4xl group-hover:rotate-12 transition-transform">🐾</span>
           </div>
-          <h1 className="text-4xl font-black text-white tracking-tight">Pet Manager</h1>
+          <h1 className="text-4xl font-black text-white tracking-tight">Pet Gerenciador</h1>
           <p className="text-slate-400 mt-2">Bem-vindo de volta! Entre na sua conta.</p>
         </div>
 
@@ -89,7 +89,7 @@ export default function Login() {
         </div>
 
         <p className="text-center mt-8 text-slate-600 text-xs uppercase tracking-widest font-bold">
-          &copy; 2026 Pet Manager Pro
+          &copy; 2026 Pet gerenciador. Todos os direitos reservados.
         </p>
       </div>
     </div>

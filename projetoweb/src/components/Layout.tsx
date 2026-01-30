@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
                 {children}
             </main>
             <footer className="py-6 text-center text-slate-500 text-sm border-t border-white/5">
-                &copy; {new Date().getFullYear()} Pet Manager - Todos os direitos reservados.
+                &copy; {new Date().getFullYear()} Pet gerenciador - Todos os direitos reservados.
             </footer>
         </div>
     );

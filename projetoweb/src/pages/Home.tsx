@@ -4,7 +4,7 @@ import bgPets from "../img/backgroud-home.jpg";
 export default function Home() {
   return (
     <div className="relative overflow-hidden -mt-8 -mx-4 h-[80vh] flex items-center justify-center rounded-b-[3rem] shadow-2xl">
-      {/* Background Image with Overlay */}
+      {/* Background */}
       <div
         className="absolute inset-0 z-0 scale-105"
         style={{
@@ -22,7 +22,7 @@ export default function Home() {
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-8 animate-in zoom-in-95 duration-1000">
         <div className="inline-block px-4 py-1 bg-teal-500/20 border border-teal-500/30 rounded-full text-teal-400 text-sm font-medium mb-4">
-          Sistema de Gestão Profissional ✨
+          Sistema de Gestão Profissional
         </div>
 
         <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight">
