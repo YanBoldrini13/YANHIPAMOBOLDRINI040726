@@ -1,3 +1,20 @@
+# Projetoweb-userApi
+
+
+DADOS DE INSCRIÇÂO:
+Projeto Desenvolvedor Front End
+
+Dados do Candidato
+N° Inscrição : 16555
+
+Nome: YAN HIPAMO BOLDRINI
+
+Email: yan.hipamo11@gmail.com
+
+CPF: 040.726.982-70
+
+RG: 1217217
+
 ==================================================
    PET MANAGER - GUIA DE INSTALAÇÃO E EXECUÇÃO
 ==================================================
@@ -49,6 +66,8 @@ O arquivo de instruções detalhado foi criado em:
 
 src/INSTRUCOES.txt
 
-
-navegar ate .\projetoweb\projetoweb\
 Para começar, basta rodar npm install e depois npm run dev!
+
+Faltou implementar: 
+- listar dentro de pet o tutor vinculado ao mesmo.
+motivo: o tutor não aparece na lista de pets. com a logica que criei com o uso de pets_id no tutor.
