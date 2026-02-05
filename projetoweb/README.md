@@ -1,4 +1,4 @@
-﻿# Projetoweb-userApi
+# Projetoweb-userApi
 
 
 DADOS DE INSCRIÇÂO:
@@ -67,3 +67,7 @@ O arquivo de instruções detalhado foi criado em:
 src/INSTRUCOES.txt
 
 Para começar, basta rodar npm install e depois npm run dev!
+
+Faltou implementar: 
+- listar dentro de pet o tutor vinculado ao mesmo.
+motivo: o tutor não aparece na lista de pets. com a logica que criei com o uso de pets_id no tutor.
