@@ -93,7 +93,7 @@ export default function TutorEdit() {
                 await vincularPet(id, petId);
             }
 
-            // Refresh tutor data to update pet list
+            // Refresh pet por tutor.
             const updatedTutor = await buscarTutorPorId(id);
             setTutor(updatedTutor);
         } catch (error) {
@@ -104,9 +104,6 @@ export default function TutorEdit() {
         }
     };
 
-    // Mock linked pets if not provided by API in the same object
-    // Since the link/unlink endpoints exist, we assume the Tutor object might have a 'pets' array
-    // If not, we'd need another endpoint to get linked pets. Let's assume (any[]) for now.
     const linkedPets = (tutor as any)?.pets || [];
 
     if (loading) return <div className="text-center py-20 text-slate-400 font-medium animate-pulse">Carregando dados do tutor...</div>;
@@ -149,7 +146,7 @@ export default function TutorEdit() {
                         </div>
                     </div>
 
-                    {/* Quick Info */}
+                    {/*  Info */}
                     <div className="glass rounded-2xl p-6 space-y-4">
                         <h4 className="text-sm font-bold text-slate-500 uppercase tracking-widest">Informações Pessoais</h4>
                         <div className="space-y-3">

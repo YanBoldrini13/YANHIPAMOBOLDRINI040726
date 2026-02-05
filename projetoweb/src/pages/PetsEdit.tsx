@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { buscarPetPorId, atualizarPet, uploadFotoPet } from "../api/pet.service";
+import { buscarTutorPorId } from "../api/tutor.service";
 import type { Pet } from "../tipos/Pet";
+import type { Tutor } from "../tipos/Tutor";
 
 export default function PetsEdit() {
     const { id } = useParams<{ id: string }>();
@@ -9,6 +11,7 @@ export default function PetsEdit() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [pet, setPet] = useState<Pet | null>(null);
+    const [tutor, setTutor] = useState<Tutor | null>(null);
 
     const [nome, setNome] = useState("");
     const [raca, setRaca] = useState("");
@@ -26,6 +29,16 @@ export default function PetsEdit() {
                 setRaca(data.raca);
                 setIdade(data.idade);
                 setPreview(data.foto?.url || null);
+
+                // Se o pet tiver tutor vinculado, busca os dados completos do tutor
+                if (data.tutor?.id) {
+                    try {
+                        const tutorData = await buscarTutorPorId(data.tutor.id);
+                        setTutor(tutorData);
+                    } catch (error) {
+                        console.error("Erro ao carregar dados do tutor", error);
+                    }
+                }
             } catch (error) {
                 console.error("Erro ao carregar pet", error);
                 alert("Erro ao carregar pet");
@@ -82,7 +95,7 @@ export default function PetsEdit() {
             </div>
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Foto Column */}
+                {/* Foto do pet */}
                 <div className="md:col-span-1 space-y-4">
                     <div className="glass rounded-2xl p-4 aspect-square flex flex-col items-center justify-center relative overflow-hidden group">
                         {preview ? (
@@ -103,7 +116,7 @@ export default function PetsEdit() {
                     <p className="text-xs text-slate-500 text-center">Dica: Fotos bem iluminadas ajudam a identificar o pet! ✨</p>
                 </div>
 
-                {/* Data Column */}
+                {/* info dados pets */}
                 <div className="md:col-span-2 glass rounded-2xl p-8 space-y-6">
                     <div className="space-y-4">
                         <div>

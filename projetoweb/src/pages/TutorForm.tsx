@@ -15,7 +15,7 @@ export default function TutorForm() {
     e.preventDefault();
     setLoading(true);
 
-    // Remove non-numeric characters from CPF for the API
+    // Remove non-numeric characters do CPF para API
     const cpfNumbers = parseInt(cpf.replace(/\D/g, ""));
 
     try {

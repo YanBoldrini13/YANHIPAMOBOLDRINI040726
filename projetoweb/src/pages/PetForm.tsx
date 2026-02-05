@@ -32,7 +32,7 @@ export default function PetForm() {
       </div>
 
       <div className="glass rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
-        {/* Glow effect */}
+        {/* brilo efeito */}
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl"></div>
 
         <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
@@ -99,7 +99,7 @@ export default function PetForm() {
       </div>
 
       <div className="mt-8 text-center text-slate-500 text-sm">
-        <p>Você poderá adicionar uma foto do pet logo após o cadastro na página de edição. 📸</p>
+        <p>Você poderá adicionar uma foto do pet logo após o cadastro na página de edição.</p>
       </div>
     </div>
   );

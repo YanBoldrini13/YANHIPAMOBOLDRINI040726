@@ -15,11 +15,11 @@ export default function Home() {
         }}
       />
 
-      {/* Dynamic Shapes for Aesthetics */}
+      {/* Formas Dinâmicas para Estética */}
       <div className="absolute top-1/4 -right-10 w-64 h-64 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-1/4 -left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
-      {/* Hero Content */}
+      {/* Conteúdo do Herói */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-8 animate-in zoom-in-95 duration-1000">
         <div className="inline-block px-4 py-1 bg-teal-500/20 border border-teal-500/30 rounded-full text-teal-400 text-sm font-medium mb-4">
           Sistema de Gestão Profissional

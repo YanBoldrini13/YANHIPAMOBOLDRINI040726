@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-      {/* Decorative Circles */}
+      {/* decorativos */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-teal-500/20 rounded-full blur-[100px] animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-[100px] animate-pulse delay-700"></div>
 
@@ -38,7 +38,7 @@ export default function Login() {
         </div>
 
         <div className="glass rounded-[2.5rem] p-10 shadow-2xl overflow-hidden relative">
-          {/* Subtle light effect */}
+          {/* cor azul decorativa */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-2xl rounded-full translate-x-12 -translate-y-12"></div>
 
           <form onSubmit={handleLogin} className="space-y-6">
